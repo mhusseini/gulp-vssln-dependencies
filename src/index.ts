@@ -5,9 +5,12 @@ var vsslnparse = require("vssln-parser");
 var fs = require("fs");
 var Vinyl = require("vinyl");
 var through = require('through2');
+var path = require('path');
 
 module.exports = function() {
     return through.obj(function (file, encoding, done) {
+        const root = path.dirname(file.path);
+
         var input;
         if (file.isStream()) {
             input = file.stream;
@@ -23,7 +26,8 @@ module.exports = function() {
         vsslnparse(input, function (solution) {
             const sortedProjects = dependencies.fromSolution(solution);
             sortedProjects.forEach(function (project) {
-                var file = new Vinyl({path: project.path});
+                const projectPath = path.join(root, project.path);
+                var file = new Vinyl({path: projectPath});
                 $this.push(file);
             });
             done();
