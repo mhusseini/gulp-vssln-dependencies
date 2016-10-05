@@ -1,7 +1,7 @@
 ///<reference path="../_references.ts"/>
 
 var dependencies = require("vssln-dependencies");
-var parse = require("vssln-parser").parse;
+var vsslnparse = require("vssln-parser");
 var fs = require("fs");
 var Vinyl = require("vinyl");
 var through = require('through2');
@@ -20,7 +20,7 @@ module.exports = function() {
         }
 
         var $this = this;
-        parse(input, function (solution) {
+        vsslnparse(input, function (solution) {
             const sortedProjects = dependencies.fromSolution(solution);
             sortedProjects.forEach(function (project) {
                 var file = new Vinyl({path: project.path});

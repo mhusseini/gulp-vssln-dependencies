@@ -1,5 +1,5 @@
 # gulp-vssln-dependencies
-Creates an ordered list of projects from the projects dependency graph in a Visual Studio Solution (sln) file.
+Returns an ordered list of projects from the projects dependency graph in a Visual Studio Solution (sln) file.
 
 Dependencies are resolved using the information created by the "Project Dependencies" tab in the "Solution Properties" window of Visual Studio. Project references set using the "References" item inside each project are not considered.
 
